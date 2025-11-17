@@ -1,0 +1,16 @@
+ECC_root{
+    docs{
+        branch_data.txt(ブランチの構成メモ)
+        diary.txt(メモ用)
+        file_data_template.txt(ファイル構成の例文的な)
+        file_data.txt(実際のファイルの構成メモ)
+    }   
+    Raspi{
+        build{
+
+        }
+        driver{
+            
+        }
+    }
+}
