@@ -3,3 +3,4 @@ file_data_template.txt
 .vscode/
 *.exe
 *.log
+build/
