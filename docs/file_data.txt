@@ -10,13 +10,13 @@ ECC_root{
 
         }
 				scr{
-
+					main.cpp(スクリプトメインコード)
 				}
 				lib{
 					
 				}
 				config{
-				
+					config.h(基本定数)
 				}
         driver{
             
