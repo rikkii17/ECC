@@ -3,19 +3,9 @@
 
 #include"clock_system.hpp"
 
-class clock_system
-{
-private:
-    /* data */
-public:
-    clock_system(/* args */);
-    ~clock_system();
-};
-
-clock_system::clock_system(/* args */)
-{
-}
-
-clock_system::~clock_system()
-{
+std::time_t get_now_time(time_t &now_time){
+    while (true){
+        std::chrono::system_clock::time_point system_now_time=std::chrono::system_clock::now();
+        now_time = std::chrono::system_clock::to_time_t(system_now_time);
+    }    
 }
