@@ -19,8 +19,11 @@ int main(){
     // ハードウェアパッケージの初期化
     std::cout <<"\t ハードウェアを初期化中"<<std::endl;
 
-    clock_system cs;
-    std::thread get_time(clock_system::get_now_time, &cs.now_time);
+    clock_system clock_systtem_instance;
+    std::thread get_time(clock_system::get_now_time, &clock_systtem_instance.now_time);
+    //システム時間をインスタンス化するスレッド
+
+    
     
 
     return 0;
