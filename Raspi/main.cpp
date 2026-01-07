@@ -5,7 +5,7 @@
 #include<thread>
 //マルチスレッドでの操作用
 
-#include"app_tasks/clock_system.hpp"
+#include"src/app_tasks/clock_system.hpp"
 //時計機能を導入するためのアプリケーションライブラリ
 
 
@@ -20,11 +20,14 @@ int main(){
     std::cout <<"\t ハードウェアを初期化中"<<std::endl;
 
     clock_system clock_systtem_instance;
-    std::thread get_time(clock_system::get_now_time, &clock_systtem_instance.now_time);
+
+    std::thread get_time(clock_system::get_now_time ,std::ref(clock_systtem_instance.now_time));
+    
     //システム時間をインスタンス化するスレッド
 
+
     
-    
+    get_time.join();
 
     return 0;
 }
