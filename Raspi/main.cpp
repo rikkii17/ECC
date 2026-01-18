@@ -19,10 +19,9 @@ int main(){
     // ハードウェアパッケージの初期化
     std::cout <<"\t ハードウェアを初期化中"<<std::endl;
 
-    clock_system clock_systtem_instance;
-
+    clock_system clock_system_instance;
     
-
+    std::thread get_now_time_thread(&clock_system::get_now_time,&clock_system_instance,std::ref(clock_system_instance.now_time));
 
     return 0;
 }

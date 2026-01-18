@@ -12,11 +12,11 @@
             入力はget_now_time関数によって行われている
             */
         
-            static::time_t get_now_time(time_t &now_time);
+            void get_now_time(time_t *now_time);
             /*
                 現在時刻を取得する。
-                    引数：      なし
-                    返り値：    現在時刻(time_t型)
+                    引数：      現在時刻を格納する変数ポインタ(time_t型)
+                    返り値：    void
             */
 
 
