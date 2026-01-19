@@ -5,7 +5,8 @@
 
 void clock_system::get_now_time(std::tm *now_time){
     while(true){
-        *now_time = *std::localtime(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
+        time_t system_time_t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
+        *now_time = *std::localtime(&system_time_t);
     }
     return;    
 }
