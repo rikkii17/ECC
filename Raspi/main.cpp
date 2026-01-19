@@ -21,7 +21,9 @@ int main(){
 
     clock_system clock_system_instance;
     
-    std::thread get_now_time_thread(&clock_system::get_now_time,&clock_system_instance,std::ref(clock_system_instance.now_time));
-
+    std::thread system_clock_thread(&clock_system::get_now_time,&clock_system_instance,std::ref(clock_system_instance.now_time));
+    while(true){
+        std::cout <<clock_system_instance.now_time->tm_hour<<clock_system_instance.now_time->tm_min<<clock_system_instance.now_time->tm_sec<<std::endl;
+    }    
     return 0;
 }

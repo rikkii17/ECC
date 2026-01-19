@@ -8,14 +8,15 @@
         public:
             std::tm *now_time;
             /*
-            今の時間を格納する。time_t型に変換した時間を入力する。
+            今の時間を格納する。std::tm型に変換した時間を入力する。
             入力はget_now_time関数によって行われている
             */
 
             void get_now_time(std::tm *now_time);
             /*
-                現在時刻を取得する。
-                    引数：      現在時刻を格納する変数ポインタ(time_t型)
+                現在時刻を取得する。(基本mainのsystem_clock_threadによってマルチスレッド処理が行われている。)
+                
+                    引数：      現在時刻を格納する変数ポインタ(std::tm型)
                     返り値：    void
             */
 
