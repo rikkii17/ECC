@@ -3,10 +3,9 @@
 
 #include"clock_system.hpp"
 
-void clock_system::get_now_time(time_t *now_time){
-    while (true){
-        std::chrono::system_clock::time_point system_now_time = std::chrono::system_clock::now();
-        now_time = std::chrono::system_clock::to_time_t(system_now_time);
-        return;
-    }    
+void clock_system::get_now_time(std::tm *now_time){
+    while(true){
+        *now_time = *std::localtime(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now()));
+    }
+    return;    
 }
