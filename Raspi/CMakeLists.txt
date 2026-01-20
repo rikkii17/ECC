@@ -17,6 +17,7 @@ add_executable(
 target_include_directories(
     ECC_device
     PUBLIC
+        config
         inc/
         inc/app_tasks
 )

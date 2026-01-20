@@ -2,6 +2,7 @@
 //時間系のシステムを定義するため。
 
 #include"clock_system.hpp"
+#include"hardconfig.hpp"
 
 void clock_system::get_now_time(std::tm *now_time){
     while(true){
