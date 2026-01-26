@@ -5,9 +5,9 @@
 #include<thread>
 //マルチスレッドでの操作用
 
-#include"config/hardconfig.hpp"
+#include"hardconfig.hpp"
 //ハードウェア全体に関する基本設定情報
-#include"inc/app_tasks/clock_system.hpp"
+#include"clock_system.hpp"
 //時計機能を導入するためのアプリケーションライブラリ
 
 
@@ -20,8 +20,6 @@ int main(){
 
     // ハードウェアパッケージの初期化
     std::cout <<"\t ハードウェアを初期化中"<<std::endl;
-    hardwere_config::controller hardwere_controller_instance;
-    hardwere_controller_instance.end_system = false;
 
 
 
@@ -29,11 +27,10 @@ int main(){
     
     std::thread system_clock_thread(&clock_system::get_now_time,&clock_system_instance,std::ref(clock_system_instance.now_time));
     while(true){
-        std::cout <<clock_system_instance.now_time->tm_hour<<":"<<clock_system_instance.now_time->tm_min<<":"<<clock_system_instance.now_time->tm_sec<<std::endl;//testコード
+        std::cout <<clock_system_instance.now_time->tm_hour<<":"<<clock_system_instance.now_time->tm_min<<":"<<clock_system_instance.now_time->tm_sec<<std::endl;   //testコード
 
         
 
-        if(hardwere_controller_instance.end_system == true) break;
     }    
 
     //終了操作
