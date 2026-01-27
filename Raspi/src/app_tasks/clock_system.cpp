@@ -3,10 +3,6 @@
 
 #include"clock_system.hpp"
 #include"hardconfig.hpp"
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 
 void clock_system::get_now_time(std::tm *now_time){
     while(true){
