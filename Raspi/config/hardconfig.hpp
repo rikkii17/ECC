@@ -3,16 +3,17 @@
 #ifndef  HARDCONFIG_HPP
     #define HARDCONFIG_HPP
 
+    #include<atomic>
+
     class hardwere_config{
         public:
             class controller{
+                private:
+                    static inline std::atomic<bool> system_is_running{true};
+                
                 public:
-                    bool end_system;
-                    /*
-                        終了の操作に関するフラグ
-                        true::市システム全体の終了
-                        false::システム全体の継続
-                    */
+                    std::atomic<bool>& get_esystem_is_running();
+
             };
     };
 #endif

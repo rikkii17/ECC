@@ -1,5 +1,5 @@
-#ifndef CLOCK_SYSTEM_H
-    #define CLOCK_SYSTEM_H
+#ifndef CLOCK_SYSTEM_HPP
+    #define CLOCK_SYSTEM_HPP
 
     #include<chrono>
 
@@ -14,7 +14,8 @@
 
             void get_now_time(std::tm *now_time);
             /*
-                現在時刻を取得する。(基本mainのsystem_clock_threadによってマルチスレッド処理が行われている。)
+                std::chronoによって現在時刻を取得する。
+                mainのsystem_clock_threadによってマルチスレッド処理を常に行うことでstd::tm型として常に時間を把握できるようにする。
                 
                     引数：      現在時刻を格納する変数ポインタ(std::tm型)
                     返り値：    void
