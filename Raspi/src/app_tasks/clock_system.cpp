@@ -14,4 +14,9 @@ void clock_system::get_now_time(std::tm *now_time){
 
     }
     return;    
+
+
+
+
+    
 }
