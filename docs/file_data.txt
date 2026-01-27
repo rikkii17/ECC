@@ -7,19 +7,24 @@ ECC_root{
     }   
     Raspi{
         build{
-
+            //cmakeのビルド用ディレクトリ
         }
-				scr{
-					main.cpp(スクリプトメインコード)
-				}
-				lib{
-					
-				}
-				config{
-					config.h(基本定数)
-				}
+		scr{
+            clock_system.cpp(clock_system.hppの実体)
+		}
+        inc{
+            clock_system.hpp(時計、アラームに関するコードヘッダーファイル)
+        }
+		lib{
+				
+		}
+		config{
+			hardconfig.h(基本定数,基本変数)
+            
+		}
         driver{
             
         }
+        main.cpp(システムメインコード)
     }
 }

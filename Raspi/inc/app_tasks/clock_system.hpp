@@ -8,8 +8,8 @@
         public:
             std::tm *now_time;
             /*
-            今の時間を格納する。std::tm型に変換した時間を入力する。
-            入力はget_now_time関数によって行われている
+                今の時間を格納する。std::tm型に変換した時間を入力する。
+                入力はget_now_time関数によって行われている
             */
 
             void get_now_time(std::tm *now_time);
@@ -20,6 +20,12 @@
                     返り値：    void
             */
 
+    };
+
+    class alarm_system{
+        //アラームに関係する情報を扱うクラス
+        public:
+            
 
     };
 #endif
