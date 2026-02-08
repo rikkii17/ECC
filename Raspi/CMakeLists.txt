@@ -1,4 +1,14 @@
 cmake_minimum_required(VERSION 3.10)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+#c++ÇÃç≈í·ÉoÅ[ÉWÉáÉìãKíˆ
+
+include(FetchContent)
+FetchContent_Declare(
+    SFML
+    GIT_REPOSITORY https://github.com/SFML/SFML.git
+    GIT_TAG        3.0.0
+)
 
 project(ECC_device CXX)
 
@@ -6,11 +16,8 @@ set(
     SOURCES
         main.cpp
         src/app_tasks/clock_system.cpp
-<<<<<<< HEAD
-        
-=======
         config/hardconfig.cpp
->>>>>>> main
+
 
 )
 
@@ -25,4 +32,5 @@ target_include_directories(
     config
     inc/
     inc/app_tasks
+    sfml-all
 )

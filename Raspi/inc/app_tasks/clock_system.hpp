@@ -2,6 +2,7 @@
     #define CLOCK_SYSTEM_HPP
 
     #include<chrono>
+    #include"hardconfig.hpp"
 
     class clock_system{
     /*時計関係の情報を載せるクラス*/

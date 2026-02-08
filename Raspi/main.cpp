@@ -19,16 +19,18 @@ int main(){
 
     // ハードウェアパッケージの初期化
     std::cout <<"\t ハードウェアを初期化中"<<std::endl;
+    clock_system clock_system_instance;
     
-    std::cout<<"アプリケーションを立ち上げています"<<std::andl;
+    std::cout<<"アプリケーションを立ち上げています"<<std::endl;
     std::thread system_clock_thread(&clock_system::get_now_time,&clock_system_instance,std::ref(clock_system_instance.now_time));
 
 
     while(true){
         std::cout <<clock_system_instance.now_time->tm_hour<<":"<<clock_system_instance.now_time->tm_min<<":"<<clock_system_instance.now_time->tm_sec<<std::endl;   //testコード
 
+          
         
-
+        if(hardwere_config::controller::get_esystem_is_running() == false)  break;
     }    
 
     //終了操作
