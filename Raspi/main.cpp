@@ -1,39 +1,53 @@
 #include<iostream>
-//CLIã‚³ãƒ¼ãƒ‰ç”¨
+//CLIƒR[ƒh—p
 #include<ctime>
-//ã‚·ã‚¹ãƒ†ãƒ æ™‚é–“ã‚’å–å¾—ã™ã‚‹ãŸã‚
+//ƒVƒXƒeƒ€ŠÔ‚ğæ“¾‚·‚é‚½‚ß
 #include<thread>
-//ãƒãƒ«ãƒã‚¹ãƒ¬ãƒƒãƒ‰ã§ã®æ“ä½œç”¨
+//ƒ}ƒ‹ƒ`ƒXƒŒƒbƒh‚Å‚Ì‘€ì—p
+#include<SFML/Window.hpp>
+//“ü—ÍEƒEƒBƒ“ƒhƒEŒn
+#include<SFML/Graphics.hpp>
+//‰f‘œo—Í
+#include<atomic>
+//atomic•Ï”‚Ì—˜—p
 
 #include"hardconfig.hpp"
-//ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢å…¨ä½“ã«é–¢ã™ã‚‹åŸºæœ¬è¨­å®šæƒ…å ±
+//ƒn[ƒhƒEƒFƒA‘S‘Ì‚ÉŠÖ‚·‚éŠî–{İ’èî•ñ
 #include"clock_system.hpp"
-//æ™‚è¨ˆæ©Ÿèƒ½ã‚’å°å…¥ã™ã‚‹ãŸã‚ã®ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ãƒ©ã‚¤ãƒ–ãƒ©ãƒª
+//Œv‹@”\‚ğ“±“ü‚·‚é‚½‚ß‚ÌƒAƒvƒŠƒP[ƒVƒ‡ƒ“ƒ‰ƒCƒuƒ‰ƒŠ
 
 
 
-// èµ·å‹•ã—ãŸå ´åˆã€
+// ‹N“®‚µ‚½ê‡A
 
 int main(){
-    std::cout <<"ã‚·ã‚¹ãƒ†ãƒ ã‚’ç«‹ã¡ä¸Šã’ã¦ã„ã¾ã™"<<std::endl;
+    std::tm test;
 
-    // ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®åˆæœŸåŒ–
-    std::cout <<"\t ãƒãƒ¼ãƒ‰ã‚¦ã‚§ã‚¢ã‚’åˆæœŸåŒ–ä¸­"<<std::endl;
+    std::cout <<"ƒVƒXƒeƒ€‚ğ—§‚¿ã‚°‚Ä‚¢‚Ü‚·"<<std::endl;
+    
+    sf::RenderWindow clockwindow(sf::VideoMode::getDesktopMode(),"fullscreen",sf::State::Fullscreen);
+
+    // ƒn[ƒhƒEƒFƒAƒpƒbƒP[ƒW‚Ì‰Šú‰»
+    std::cout <<"\t ƒn[ƒhƒEƒFƒA‚ğ‰Šú‰»’†"<<std::endl;
     clock_system clock_system_instance;
     
-    std::cout<<"ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’ç«‹ã¡ä¸Šã’ã¦ã„ã¾ã™"<<std::endl;
+    std::cout<<"ƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ğ—§‚¿ã‚°‚Ä‚¢‚Ü‚·"<<std::endl;
     std::thread system_clock_thread(&clock_system::get_now_time,&clock_system_instance,std::ref(clock_system_instance.now_time));
 
+    while(clockwindow.isOpen()){
+        if(test.tm_sec != clock_system_instance.now_time->tm_sec){
+            std::cout <<clock_system_instance.now_time->tm_hour<<":"<<clock_system_instance.now_time->tm_min<<":"<<clock_system_instance.now_time->tm_sec<<hardwere_config::controller::put_system_is_running<<std::endl;   //testƒR[ƒh
+            test = *clock_system_instance.now_time;
+        }
+        if(hardwere_config::controller::get_system_is_running() == false) std::cout<<"end"<<std::endl;
 
-    while(true){
-        std::cout <<clock_system_instance.now_time->tm_hour<<":"<<clock_system_instance.now_time->tm_min<<":"<<clock_system_instance.now_time->tm_sec<<std::endl;   //testã‚³ãƒ¼ãƒ‰
 
-          
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true)   hardwere_config::controller::put_system_is_running(false);
         
-        if(hardwere_config::controller::get_esystem_is_running() == false)  break;
+        if(hardwere_config::controller::get_system_is_running() == false)  break;
     }    
 
-    //çµ‚äº†æ“ä½œ
+    //I—¹‘€ì
     system_clock_thread.join();
     return 0;
 }

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.11)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #c++ÇÃç≈í·ÉoÅ[ÉWÉáÉìãKíˆ
@@ -9,6 +9,7 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/SFML/SFML.git
     GIT_TAG        3.0.0
 )
+FetchContent_MakeAvailable(SFML)
 
 project(ECC_device CXX)
 
@@ -32,5 +33,10 @@ target_include_directories(
     config
     inc/
     inc/app_tasks
-    sfml-all
+)
+
+target_link_libraries(
+    ECC_device 
+    sfml-window
+    sfml-graphics
 )
