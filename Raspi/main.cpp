@@ -1,25 +1,25 @@
 #include<iostream>
-//CLIコード用
+//CLI�R�[�h�p
 #include<ctime>
-//システム時間を取得するため
+//�V�X�e�����Ԃ��擾���邽��
 #include<thread>
-//マルチスレッドでの操作用
+//�}���`�X���b�h�ł̑���p
 
 #include"hardconfig.hpp"
-//ハードウェア全体に関する基本設定情報
+//�n�[�h�E�F�A�S�̂Ɋւ����{�ݒ���
 #include"clock_system.hpp"
-//時計機能を導入するためのアプリケーションライブラリ
+//���v�@�\�𓱓����邽�߂̃A�v���P�[�V�������C�u����
 
 
 
-// 起動した場合、
+// �N�������ꍇ�A
 
 int main(){
-    std::cout <<"システムを立ち上げています"<<std::endl;
+    std::cout <<"�V�X�e���𗧂��グ�Ă��܂�"<<std::endl;
 
 
-    // ハードウェアパッケージの初期化
-    std::cout <<"\t ハードウェアを初期化中"<<std::endl;
+    // �n�[�h�E�F�A�p�b�P�[�W�̏�����
+    std::cout <<"\t �n�[�h�E�F�A����������"<<std::endl;
 
 
 
@@ -27,13 +27,13 @@ int main(){
     
     std::thread system_clock_thread(&clock_system::get_now_time,&clock_system_instance,std::ref(clock_system_instance.now_time));
     while(true){
-        std::cout <<clock_system_instance.now_time->tm_hour<<":"<<clock_system_instance.now_time->tm_min<<":"<<clock_system_instance.now_time->tm_sec<<std::endl;   //testコード
+        std::cout <<clock_system_instance.now_time->tm_hour<<":"<<clock_system_instance.now_time->tm_min<<":"<<clock_system_instance.now_time->tm_sec<<std::endl;   //test�R�[�h
 
         
 
     }    
 
-    //終了操作
+    //�I������
     system_clock_thread.join();
     return 0;
 }
