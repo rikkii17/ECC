@@ -6,21 +6,20 @@
 
     class clock_system{
     /*時計関係の情報を載せるクラス*/
-        public:
-            std::tm *now_time;
-            /*
-                今の時間を格納する。std::tm型に変換した時間を入力する。
-                入力はget_now_time関数によって行われている
-            */
+        private:
+            static inline std::atomic<std::time_t> now_time_t{};
 
-            void get_now_time(std::tm *now_time);
+        public:
+            static void set_now_time();
             /*
                 std::chronoによって現在時刻を取得する。
                 mainのsystem_clock_threadによってマルチスレッド処理を常に行うことでstd::tm型として常に時間を把握できるようにする。
                 
-                    引数：      現在時刻を格納する変数ポインタ(std::tm型)
+                    引数：      void
                     返り値：    void
             */
+
+            static std::tm get_now_time();
 
     };
 

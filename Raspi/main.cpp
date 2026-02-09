@@ -29,16 +29,13 @@ int main(){
 
     // ハードウェアパッケージの初期化
     std::cout <<"\t ハードウェアを初期化中"<<std::endl;
-    clock_system clock_system_instance;
     
     std::cout<<"アプリケーションを立ち上げています"<<std::endl;
-    std::thread system_clock_thread(&clock_system::get_now_time,&clock_system_instance,std::ref(clock_system_instance.now_time));
+    std::thread system_clock_thread(clock_system::set_now_time);
 
     while(clockwindow.isOpen()){
-        if(test.tm_sec != clock_system_instance.now_time->tm_sec){
-            std::cout <<clock_system_instance.now_time->tm_hour<<":"<<clock_system_instance.now_time->tm_min<<":"<<clock_system_instance.now_time->tm_sec<<hardwere_config::controller::put_system_is_running<<std::endl;   //testコード
-            test = *clock_system_instance.now_time;
-        }
+        std::tm now_time = clock_system::get_now_time();
+
         if(hardwere_config::controller::get_system_is_running() == false) std::cout<<"end"<<std::endl;
 
 
