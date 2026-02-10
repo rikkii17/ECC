@@ -5,7 +5,7 @@
 
     #include<atomic>
 
-    class softwere_config{
+    class software_config{
         public:
             class controller{
                 private:

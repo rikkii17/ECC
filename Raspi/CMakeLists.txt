@@ -24,7 +24,10 @@ set(
     SOURCES
         main.cpp
         src/app_tasks/clock_system.cpp
+        src/helper/initialization.cpp
         config/softconfig.cpp
+        config/errror.cpp
+        
 
 
 )
@@ -40,6 +43,7 @@ target_include_directories(
     config
     inc/
     inc/app_tasks
+    inc/helper
 )
 
 target_link_libraries(

@@ -12,7 +12,7 @@ void clock_system::set_now_time(){
         //std::chronoによって時間を把握し、それをtime_t型に変換
         
 
-        if(softwere_config::controller::get_system_is_running() == false)   break;
+        if(software_config::controller::get_system_is_running() == false)   break;
     }
     return;    
 }

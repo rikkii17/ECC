@@ -15,19 +15,23 @@
 //ハードウェア全体に関する基本設定情報
 #include"clock_system.hpp"
 //時計機能を導入するためのアプリケーションライブラリ
+#include"initialization.hpp"
+//初期化系の関数ライブラリ
+#include<error.hpp>
+//エラー関係を扱うライブラリ
 
 
-
-// 起動した場合、
 
 int main(){
-    std::tm test;
-
     std::cout <<"Starting up the system"<<std::endl;
 
     // ハードウェアパッケージの初期化
     std::cout <<"\t Initializing hardware"<<std::endl;
-    
+    int error_flag;
+
+    error_flag = initialization::software::device();
+    if(error_process::initialization_error(error_flag)) std::exit(EXIT_FAILURE);
+
 
     std::cout<<"Launching the application"<<std::endl;
 
@@ -43,10 +47,10 @@ int main(){
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
                 clockwindow.close();
-                softwere_config::controller::put_system_is_running(false);
+                software_config::controller::put_system_is_running(false);
             }
         }
-        if(softwere_config::controller::get_system_is_running() == false)  break;
+        if(software_config::controller::get_system_is_running() == false)  break;
     }    
 
     std::cout<<"\n \n \n Shutting down system"<<std::endl;
