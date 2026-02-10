@@ -11,13 +11,20 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SFML)
 
+FetchContent_Declare(
+  csv_parser
+  GIT_REPOSITORY https://github.com/vincentlaucsb/csv-parser.git
+  GIT_TAG        master
+)
+FetchContent_MakeAvailable(csv_parser)
+
 project(ECC_device CXX)
 
 set(
     SOURCES
         main.cpp
         src/app_tasks/clock_system.cpp
-        config/hardconfig.cpp
+        config/softconfig.cpp
 
 
 )
@@ -39,4 +46,5 @@ target_link_libraries(
     ECC_device 
     sfml-window
     sfml-graphics
+    csv
 )

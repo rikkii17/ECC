@@ -11,7 +11,7 @@
 #include<atomic>
 //atomic変数の利用
 
-#include"hardconfig.hpp"
+#include"softconfig.hpp"
 //ハードウェア全体に関する基本設定情報
 #include"clock_system.hpp"
 //時計機能を導入するためのアプリケーションライブラリ
@@ -43,10 +43,10 @@ int main(){
 
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
                 clockwindow.close();
-                hardwere_config::controller::put_system_is_running(false);
+                softwere_config::controller::put_system_is_running(false);
             }
         }
-        if(hardwere_config::controller::get_system_is_running() == false)  break;
+        if(softwere_config::controller::get_system_is_running() == false)  break;
     }    
 
     std::cout<<"\n \n \n Shutting down system"<<std::endl;

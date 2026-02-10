@@ -2,7 +2,13 @@
     #define CLOCK_SYSTEM_HPP
 
     #include<chrono>
-    #include"hardconfig.hpp"
+    //時刻を取得するためのライブラリ
+    #include<atomic>
+    //now_time_tをスレッド間で安全に利用できるように規定
+    #include<filesystem>
+    //alarmのファイルを扱うために必須
+
+    #include"softconfig.hpp"
 
     class clock_system{
     /*時計関係の情報を載せるクラス*/
@@ -27,6 +33,6 @@
         //アラームに関係する情報を扱うクラス
         public:
             
-
+            
     };
 #endif
