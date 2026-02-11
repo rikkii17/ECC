@@ -16,13 +16,15 @@ int initialization::software::device(){
 }
 
 int initialization::software::alarm_file_initialization(){
-
+    //プロジェクトデータディレクトリまで移動
     if(int errorflag = filesystem_helper::move::device_data_directory() != error_number::filesystem::OK){
         if(errorflag == error_number::filesystem::SYSTEM_DIR_IS_NOT_EXIST)  return(error_number::filesystem::SYSTEM_DIR_IS_NOT_EXIST);
     }
     
     if(!std::filesystem::exists(directory_path::system_data_directory) || !std::filesystem::is_directory(directory_path::system_data_directory))    std::filesystem::create_directory(directory_path::system_data_directory);
     std::filesystem::current_path(directory_path::system_data_directory);
+
+    
 
 
 
