@@ -25,6 +25,8 @@ int filesystem_helper::move::device_data_directory(){
         }
         
         std::cout<<"\t\tcreate project data directory"<<std::endl;
+        //データディレクトリに移動
+        std::filesystem::current_path(directory_path::system_data_directory);
         return(error_number::filesystem::CREATE_DATA_DIR);
     }
     //データディレクトリに移動
