@@ -11,7 +11,9 @@ int filesystem_helper::move::device_data_directory(){
 
     if(!std::filesystem::exists(directory_path::system_data_directory) || !std::filesystem::is_directory(directory_path::system_data_directory)){    
         try{
+            //プロジェクトディレクトリの構築
             std::filesystem::create_directory(directory_path::system_data_directory);
+            //ファイルの権限を変更
             std::filesystem::permissions(
                 directory_path::system_data_directory,
                 std::filesystem::perms::owner_all | std::filesystem::perms::group_all | std::filesystem::perms::others_all,
@@ -21,10 +23,14 @@ int filesystem_helper::move::device_data_directory(){
             std::cerr<<"error :project file can't create!/n"<<e.what()<<std::endl;
             return(error_number::filesystem::DIR_CANNOT_CREATE);
         }
-
+        
         std::cout<<"\t\tcreate project data directory"<<std::endl;
+        //データディレクトリに移動
+        std::filesystem::current_path(directory_path::system_data_directory);
         return(error_number::filesystem::CREATE_DATA_DIR);
     }
+    //データディレクトリに移動
+    std::filesystem::current_path(directory_path::system_data_directory);
 
     
     return(error_number::filesystem::OK);

@@ -38,4 +38,10 @@
         static inline const std::filesystem::path system_data_directory = "ECC_device";
 
     };
+    class filename{
+    public:
+        static constexpr std::string_view ALARM_LIST = "alarm_list.csv";
+
+    };
+
 #endif
