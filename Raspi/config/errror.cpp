@@ -8,7 +8,7 @@ bool error_process::initialization_error(int error_flag){
         std::cout<<"Do you want to start it as is?(Y/n)"<<std::endl;
         std::cin>>input_data;
         if(input_data[0] == 'N' || input_data[0] == 'n')    return(false);
-        else    return(true);
     }
 
+    return(true);
 }

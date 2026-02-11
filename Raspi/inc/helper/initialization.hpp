@@ -3,12 +3,21 @@
 
     #include<iostream>
     //CLI出力させる目的
+    #include<iomanip>
+    //高度なCLI出力ライブラリ
     #include<filesystem>
     //ディレクトリ、ファイルを操作する目的
     #include<fstream>
     //ファイルを読み書きするためのライブラリ
     #include<csv.hpp>
     //CSVのファイルを扱うためのライブラリ
+
+    #include"softconfig.hpp"
+    //filepathの定数などを取得する
+    #include"filesystem.hpp"
+    //システムのファイル操作などをまとめるライブラリ
+    #include"error.hpp"
+    //エラー関係を扱うライブラリ
 
     class initialization{
     public:

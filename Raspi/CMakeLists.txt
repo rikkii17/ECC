@@ -25,6 +25,7 @@ set(
         main.cpp
         src/app_tasks/clock_system.cpp
         src/helper/initialization.cpp
+        src/helper/filesystem.cpp
         config/softconfig.cpp
         config/errror.cpp
         

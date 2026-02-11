@@ -1,26 +1,14 @@
 #include"initialization.hpp"
 
-#include<iostream>
-//CLI出力させる目的
-#include<iomanip>
-//高度なCLI出力ライブラリ
-#include<filesystem>
-//ディレクトリ、ファイルを操作する目的
-#include<fstream>
-//ファイルを読み書きするためのライブラリ
-#include<csv.hpp>
-//CSVのファイルを扱うためのライブラリ
-#include"error.hpp"
-//エラー関係を扱うライブラリ
-
 
 int initialization::software::device(){
     int error_flag;
     
     error_flag = initialization::software::alarm_file_initialization();
     //エラー時の処理
-    if(error_flag = error_number::initialization::OPT_DIR_IS_NOT_EXIST){
-        std::cerr<<"error"<<std::setw(1)<<":"<<"opt directory is not found"<<std::endl;
+    if(error_flag == error_number::initialization::SYSTEM_DIR_IS_NOT_EXIST){
+        std::cerr<<"error"<<std::setw(1)<<":"<<"system directory is not found"<<std::endl;
+        std::cerr<<"\t"<<std::filesystem::current_path()<<std::endl;
         return(error_number::initialization::ALARM_FILE_IS_NOT_FOUND);
     }
 
@@ -28,10 +16,17 @@ int initialization::software::device(){
 }
 
 int initialization::software::alarm_file_initialization(){
-    std::filesystem::current_path("/");
-    //ディレクトリを一度システムルートディレクトリに戻す
+
+    if(int errorflag = filesystem_helper::move::device_data_directory() != error_number::initialization::OK){
+        if(errorflag == error_number::initialization::CREATE_DATA_DIR){
+            std::cout<<"create project data directory"<<std::endl;
+        }
+        if(errorflag == error_number::initialization::SYSTEM_DIR_IS_NOT_EXIST)  return(error_number::initialization::SYSTEM_DIR_IS_NOT_EXIST);
+    }
     
-    if(!std::filesystem::exists("/opt") || !std::filesystem::is_directory("/opt"))  return(error_number::initialization::OPT_DIR_IS_NOT_EXIST);
+    if(!std::filesystem::exists(directory_path::system_data_directory) || !std::filesystem::is_directory(directory_path::system_data_directory))    std::filesystem::create_directory(directory_path::system_data_directory);
+    std::filesystem::current_path(directory_path::system_data_directory);
+
     
 
     return(error_number::initialization::OK);

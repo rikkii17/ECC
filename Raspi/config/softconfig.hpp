@@ -1,9 +1,12 @@
 //config/softconfig.hpp
-//hardwareã®åŸºæœ¬è¨­å®šã«é–¢ã™ã‚‹ãƒ˜ãƒƒãƒ€ãƒ¼
+//hardware‚ÌŠî–{İ’è‚ÉŠÖ‚·‚éƒwƒbƒ_[
 #ifndef  SOFTCONFIG_HPP
     #define SOFTCONFIG_HPP
 
     #include<atomic>
+    //system‚Ìƒtƒ‰ƒbƒOŠÖŒW‚ğˆÀ‘S‚Éæ‚èˆµ‚¤ˆ×‚Ìƒ‰ƒCƒuƒ‰ƒŠ
+    #include<filesystem>
+    //filesystem‚ÌƒpƒX‚ğconfig‚·‚é‚½‚ß
 
     class software_config{
         public:
@@ -14,18 +17,25 @@
                 public:
                     static std::atomic<bool>& get_system_is_running();
                     /*
-                        system_is_runningå¤‰æ•°ã‚’å®‰å…¨ã«å–å¾—ã™ã‚‹ç›®çš„
-                            å¼•æ•°ï¼š       void               
-                            è¿”ã‚Šå€¤ ï¼š   std::atomic<bool>&  system_is_runningã®ãƒ‘ã‚¹
+                        system_is_running•Ï”‚ğˆÀ‘S‚Éæ“¾‚·‚é–Ú“I
+                            ˆø”F       void               
+                            •Ô‚è’l F   std::atomic<bool>&  system_is_running‚ÌƒpƒX
                     */
                     static void put_system_is_running(bool system_flag);
                     /*
-                        system_is_runningã®å€¤ã‚’system_flagã®å€¤ã§ä¸Šæ›¸ãã™ã‚‹
-                        ç¬¬1å¼•æ•°ï¼š   bool    system_flag      ä¸Šæ›¸ãã™ã‚‹å€¤
-                        è¿”ã‚Šå€¤ï¼š    void   
+                        system_is_running‚Ì’l‚ğsystem_flag‚Ì’l‚Åã‘‚«‚·‚é
+                        ‘æ1ˆø”F   bool    system_flag      ã‘‚«‚·‚é’l
+                        •Ô‚è’lF    void   
         
                     */
-
             };
+    };
+
+    class directory_path{
+    public:
+        static inline const std::filesystem::path var = "/var";
+        static inline const std::filesystem::path lib = "lib";
+        static inline const std::filesystem::path system_data_directory = "ECC_device";
+
     };
 #endif
