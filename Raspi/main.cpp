@@ -39,7 +39,7 @@ int main(){
     std::thread system_clock_thread(clock_system::set_now_time);
 
     std::cout<<"\t starting the clock GUI window \n \n \n"<<std::endl;
-    sf::RenderWindow clockwindow(sf::VideoMode::getDesktopMode(),"fullscreen",sf::State::Fullscreen);
+    sf::RenderWindow clockwindow(sf::VideoMode({1280,720}), "fullscreen");
 
     while(clockwindow.isOpen()){
         while(std::optional event = clockwindow.pollEvent()){
