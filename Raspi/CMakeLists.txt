@@ -18,6 +18,9 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(csv_parser)
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GPIODCXX REQUIRED IMPORTED_TARGET libgpiodcxx)
+
 project(ECC_device CXX)
 
 set(
@@ -52,4 +55,5 @@ target_link_libraries(
     sfml-window
     sfml-graphics
     csv
+    PkgConfig::GPIODCXX
 )

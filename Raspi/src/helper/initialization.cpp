@@ -30,12 +30,14 @@ int initialization::software::alarm_file_initialization(){
     if(int errorflag = filesystem_helper::move::device_data_directory() != error_number::filesystem::OK){
         if(errorflag == error_number::filesystem::SYSTEM_DIR_IS_NOT_EXIST)  return(error_number::filesystem::SYSTEM_DIR_IS_NOT_EXIST);
     }
+
     //アラームリストのファイルを開く(作成して開く)
     std::ofstream alarm_list(std::string{filename::ALARM_LIST});
     if(!alarm_list.is_open())    return(error_number::filesystem::FILE_IS_NOT_OPEN);
         //中身があるか確認
         if(std::filesystem::file_size(std::string{filename::ALARM_LIST}) == 0)   return(error_number::filesystem::FILE_IS_EMPTY);
 
+        
 
     alarm_list.close();
 
