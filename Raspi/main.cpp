@@ -37,25 +37,32 @@ int main(){
 
     std::cout<<"\t starting the clock system"<<std::endl;
     std::thread system_clock_thread(clock_system::set_now_time);
+    std::thread alarm_system_thread(alarm_system::check_alarm);
 
     std::cout<<"\t starting the clock GUI window \n \n \n"<<std::endl;
     sf::RenderWindow clockwindow(sf::VideoMode({1280,720}), "fullscreen");
 
+    //ウィンドウループ
     while(clockwindow.isOpen()){
         while(std::optional event = clockwindow.pollEvent()){
             std::tm now_time = clock_system::get_now_time();
 
+          //イベントハンドラ  
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
                 clockwindow.close();
                 software_config::controller::put_system_is_running(false);
             }
         }
+
+
+        //終了確認
         if(software_config::controller::get_system_is_running() == false)  break;
     }    
 
     std::cout<<"\n \n \n Shutting down system"<<std::endl;
     //終了操作
     system_clock_thread.join();
+    alarm_system_thread.join();
 
     std::cout<<"Bye"<<std::endl;
     return 0;

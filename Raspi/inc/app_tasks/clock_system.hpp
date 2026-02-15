@@ -9,6 +9,8 @@
     //alarmのファイルを扱うために必須
 
     #include"softconfig.hpp"
+    #include"clock_system_config.hpp"
+
 
     class clock_system{
     /*時計関係の情報を載せるクラス*/
@@ -32,7 +34,13 @@
     class alarm_system{
         //アラームに関係する情報を扱うクラス
         public:
-            
-            
+            static void check_alarm();
+            /*
+                アラームに関する処理を行うスレッド
+            */
+            static void set_alarm_list(int hour,int minuts,alarm_system_config::week_config week_data);
+            /*
+                アラームリストに新しい時間を設定する
+            */
     };
 #endif

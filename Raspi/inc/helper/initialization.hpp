@@ -18,6 +18,8 @@
     //システムのファイル操作などをまとめるライブラリ
     #include"error.hpp"
     //エラー関係を扱うライブラリ
+    #include"clock_system_config.hpp"
+    //時計関係のconfigを入れるライブラリ
 
     class initialization{
     public:
