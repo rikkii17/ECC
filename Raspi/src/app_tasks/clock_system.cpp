@@ -29,7 +29,7 @@ void alarm_system::check_alarm(){
     std::tm now_time;
 
     while (true){
-        if(alarm_system_config::ararm_is_ringing){
+        if(alarm_list_data != nullptr && alarm_system_config::ararm_is_ringing){
             now_time = clock_system::get_now_time();
 
             //アラームをならすフラッグを立てる
@@ -38,10 +38,10 @@ void alarm_system::check_alarm(){
             //次のリストデータへアクセス
             if(alarm_list_data->next == nullptr)    alarm_list_data = alarm_system_config::alarm_list_head;
             else    alarm_list_data = alarm_list_data->next;
-
-            //終了操作
-            if(software_config::controller::get_system_is_running() == false)   break;
         }
+        
+        //終了操作
+        if(software_config::controller::get_system_is_running() == false)   break;
         
     }
     return;

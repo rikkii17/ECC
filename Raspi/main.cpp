@@ -37,8 +37,9 @@ int main(){
 
     std::cout<<"\t starting the clock system"<<std::endl;
     std::thread system_clock_thread(clock_system::set_now_time);
+    std::cout<<"\t startiong the alarm system"<<std::endl;
     std::thread alarm_system_thread(alarm_system::check_alarm);
-
+    //SFMLウィンドウ立ち上げ
     std::cout<<"\t starting the clock GUI window \n \n \n"<<std::endl;
     sf::RenderWindow clockwindow(sf::VideoMode({1280,720}), "fullscreen");
 
@@ -61,9 +62,11 @@ int main(){
 
     std::cout<<"\n \n \n Shutting down system"<<std::endl;
     //終了操作
-    system_clock_thread.join();
     alarm_system_thread.join();
+    std::cout<<"\talarm system shutdown"<<std::endl;
+    system_clock_thread.join();
+    std::cout<<"\tclock system shutdown"<<std::endl;
 
-    std::cout<<"Bye"<<std::endl;
+    std::cout<<"\n Bye"<<std::endl;
     return 0;
 }
