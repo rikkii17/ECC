@@ -8,7 +8,7 @@
         class pin_number{
         public:
         
-    }   ;
+    };
 
     };
 

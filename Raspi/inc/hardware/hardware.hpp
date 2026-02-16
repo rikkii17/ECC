@@ -8,10 +8,11 @@
             public:
             std::string base_path;
 
+            //コンストラクタ
             pwm(int chip,int channnel);
-        };
 
-        static void hardware_system();
+            void set_params()
+        };
     };
 
 #endif

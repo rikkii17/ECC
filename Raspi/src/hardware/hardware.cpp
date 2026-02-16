@@ -14,15 +14,10 @@ hardware::pwm::pwm(int chip,int channel)
         std::ofstream export_file("/sys/class/pwm/pwmchip" + std::to_string(chip) + "/export");
         if(export_file.is_open()){
             export_file<<channel;
-            //チャンネル番号の書き込み
+            //チャンネル番揉の搗き撼み
         }
         else{
             std::cerr<<"Error:The channel was not secured"<<std::endl;
         }
     }
 
-
-void hardware::hardware_system(){
-    
-    return;
-}
