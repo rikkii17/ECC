@@ -60,7 +60,7 @@ int main(){
         if(software_config::controller::get_system_is_running() == false)  break;
     }    
 
-    std::cout<<"\n \n \n Shutting down system"<<std::endl;
+    std::cout<<"\n \n \nShutting down system"<<std::endl;
     //I—¹‘€ì
     alarm_system_thread.join();
     std::cout<<"\talarm system shutdown"<<std::endl;
