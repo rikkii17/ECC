@@ -11,13 +11,28 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(SFML)
 
+FetchContent_Declare(
+  csv_parser
+  GIT_REPOSITORY https://github.com/vincentlaucsb/csv-parser.git
+  GIT_TAG        master
+)
+FetchContent_MakeAvailable(csv_parser)
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GPIODCXX REQUIRED IMPORTED_TARGET libgpiodcxx)
+
 project(ECC_device CXX)
 
 set(
     SOURCES
         main.cpp
         src/app_tasks/clock_system.cpp
-        config/hardconfig.cpp
+        src/helper/initialization.cpp
+        src/helper/filesystem.cpp
+        src/hardware/hardware.cpp
+        config/softconfig.cpp
+        config/errror.cpp
+        
 
 
 )
@@ -33,10 +48,14 @@ target_include_directories(
     config
     inc/
     inc/app_tasks
+    inc/helper
+    inc/hardware
 )
 
 target_link_libraries(
     ECC_device 
     sfml-window
     sfml-graphics
+    csv
+    PkgConfig::GPIODCXX
 )
