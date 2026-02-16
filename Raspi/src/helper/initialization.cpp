@@ -46,3 +46,18 @@ int initialization::software::alarm_file_initialization(){
 
     return(error_number::filesystem::OK);
 }
+
+void initialization::software::input_pin(){
+    std::ofstream export_file(hardware_config::base_path + "export");
+    export_file << hardware_config::pin_number::gpio_input;
+    export_file.close();
+
+    // OSがファイルを作成するまで少し待機
+    usleep(5000); 
+
+    // 2. 出力方向に設定 (Direction)
+    std::ofstream dir_file(hardware_config::base_path + "gpio" + hardware_config::pin_number::gpio_input + "/direction");
+    dir_file << "out";
+    dir_file.close();
+
+}

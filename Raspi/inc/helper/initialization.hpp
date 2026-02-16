@@ -20,6 +20,8 @@
     //エラー関係を扱うライブラリ
     #include"clock_system_config.hpp"
     //時計関係のconfigを入れるライブラリ
+    #include"hardware.hpp"
+    #include"hardware_config.hpp"
 
     class initialization{
     public:
@@ -34,6 +36,8 @@
                 */
 
                 static int alarm_file_initialization();
+
+                static void input_pin();
 
 
         };

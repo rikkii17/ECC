@@ -1,6 +1,8 @@
 #ifndef HARDWARE_HPP
     #define HARDWARE_HPP
     #include<string>
+
+    #include"hardware_config.hpp"
     
     class hardware{
     public:
@@ -11,8 +13,11 @@
             //コンストラクタ
             pwm(int chip,int channnel);
 
-            void set_params()
+            
         };
+
+
+        static void hardware_system();
     };
 
 #endif

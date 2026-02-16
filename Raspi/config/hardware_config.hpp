@@ -7,9 +7,11 @@
     public:
         class pin_number{
         public:
-        
-    };
+            
+    static inline const std::string gpio_input = "12";
+        };
 
+    static inline const std::string base_path = "/sys/class/gpio/";
     };
 
 #endif

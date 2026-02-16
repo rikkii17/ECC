@@ -21,3 +21,15 @@ hardware::pwm::pwm(int chip,int channel)
         }
     }
 
+void hardware::hardware_system(){
+     while(true){
+        std::ofstream val_file(hardware_config::base_path + "gpio" + hardware_config::pin_number::gpio_input + "/value");
+        val_file << alarm_system_config::ararm_is_ringing; 
+        val_file.close();
+
+        
+        if(software_config::controller::get_system_is_running() == false)   break;
+    }
+    return;
+
+}
