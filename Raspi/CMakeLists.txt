@@ -29,6 +29,7 @@ set(
         src/app_tasks/clock_system.cpp
         src/helper/initialization.cpp
         src/helper/filesystem.cpp
+        src/hardware/hardware.cpp
         config/softconfig.cpp
         config/errror.cpp
         
@@ -48,6 +49,7 @@ target_include_directories(
     inc/
     inc/app_tasks
     inc/helper
+    inc/hardware
 )
 
 target_link_libraries(
