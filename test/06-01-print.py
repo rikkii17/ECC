@@ -35,10 +35,10 @@ def readadc(adcnum, clockpin, mosipin, misopin, cspin):
 
 GPIO.setmode(GPIO.BCM)
 # ピンの名前を変数として定義
-SPICLK = 11
-SPIMOSI = 10
-SPIMISO = 9
-SPICS = 8
+SPICLK = 23
+SPIMOSI = 19
+SPIMISO = 21
+SPICS = 24
 # SPI通信用の入出力を定義
 GPIO.setup(SPICLK, GPIO.OUT)
 GPIO.setup(SPIMOSI, GPIO.OUT)
