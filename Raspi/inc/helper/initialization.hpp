@@ -25,22 +25,34 @@
 
     class initialization{
     public:
-            class software{
-            public:
-                static int device();
-                /*
-                    全体の初期化を行う。
-                    
-                    引数:   void
-                    返り値: void
-                */
-
-                static int alarm_file_initialization();
-
-                static void input_pin();
-
-
+        class software{
+        public:
+            static int alarm_file_initialization();
+            /*
+                アラームファイルの読み込みを行う（未実装）
+                
+                引数    ;なし
+                返り値  :レスポンスコード
+            */
         };
+
+        class hardware{
+            static void output_pin();
+            /*
+                ハードウェアのoutputピンを確保するための関数
+            */
+        };
+
+
+        
+        static int device();
+            /*
+                全体の初期化を行う。
+                
+                引数:   void
+                返り値: レスポンスコード
+            */
+           
     };
     
 #endif
