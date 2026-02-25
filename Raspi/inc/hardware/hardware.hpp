@@ -13,6 +13,11 @@
             //コンストラクタ
             pwm(int chip,int channnel);
 
+            void output(int period,int duty_cycle,int enable,int polarity);
+            /*
+                
+            */
+
             
         };
 

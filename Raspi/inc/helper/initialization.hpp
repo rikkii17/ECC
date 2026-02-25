@@ -37,10 +37,7 @@
         };
 
         class hardware{
-            static void output_pin();
-            /*
-                ハードウェアのoutputピンを確保するための関数
-            */
+            
         };
 
 
