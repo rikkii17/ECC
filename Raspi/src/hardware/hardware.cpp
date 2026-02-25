@@ -23,6 +23,11 @@ hardware::pwm::pwm(int chip,int channel)
 
 void hardware::pwm::output(int period,int duty_cycle,int enable,int polarity){
     std::ofstream period_file(base_path+"pariod");
+    std::ofstream duty_cycle_file(base_path+"duty_cycle");
+    std::ofstream enable_file(base_path+"enable");
+    std::ofstream polarity_file(base_path+"polarity");
+
+    
 
     return;
 }
