@@ -3,6 +3,7 @@
     
     #include<iostream>
     //CLIにエラー文を表示
+    #include<atomic>
 
     class error_number{
     public:
@@ -24,6 +25,13 @@
             static constexpr int FILE_IS_NOT_OPEN = -3;
             
         };
+
+        class hardware{
+        public:
+            static constexpr int HARDWARE_FILE_IS_NOT_OPEN = -1;
+
+            static constexpr int OK = 0;
+        };
     };
 
     class error_process{
@@ -35,6 +43,13 @@
             返り値  :   system_is_runningに返すブール値
         */
     };
+
+    class error_flag{
+    public:
+        static inline std::atomic<int> hardware_pwm_error{error_number::hardware::OK};
+    };
+    
+
 
 
 #endif
