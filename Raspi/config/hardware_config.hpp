@@ -8,10 +8,12 @@
         class pin_number{
         public:
             
-    static inline const std::string gpio_input = "12";
+    static inline const std::string gpio_output = "12";
+    //outputピンを設定する
         };
 
     static inline const std::string base_path = "/sys/class/gpio/";
+    //gpioにハードからアクセスするためのpath
     };
 
 #endif

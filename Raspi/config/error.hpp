@@ -28,7 +28,12 @@
 
     class error_process{
     public:
-       static bool initialization_error(int error_flag);
+        static bool initialization_error(int error_flag);
+        /*
+            っ初期化エラーが出たものによってエラー処理を分岐する関数
+            第1引数 :   エラーフラグ（int)
+            返り値  :   system_is_runningに返すブール値
+        */
     };
 
 

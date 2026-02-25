@@ -51,18 +51,24 @@ int main(){
     //ウィンドウループ
     while(clockwindow.isOpen()){
         while(std::optional event = clockwindow.pollEvent()){
+            //時間を取得
             std::tm now_time = clock_system::get_now_time();
 
           //イベントハンドラ  
+
+          //Escの処理
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
                 clockwindow.close();
                 software_config::controller::put_system_is_running(false);
             }
-        }
+            }
 
 
         //終了確認
-        if(software_config::controller::get_system_is_running() == false)  break;
+        if(software_config::controller::get_system_is_running() == false){
+            clockwindow.close();
+            break;
+        }
     }    
 
     std::cout<<"\n \n \nShutting down system"<<std::endl;
