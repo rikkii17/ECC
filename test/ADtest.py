@@ -1,9 +1,9 @@
 from gpiozero import MCP3208
 from time import sleep
 
-# ƒsƒ“İ’è (BCM”Ô†)
-# ƒNƒƒbƒN=23, MOSI=19, MISO=21, CS=24
-# ¦“à•”“I‚ÉSoftware SPI‚Æ‚µ‚Ä“®ì‚·‚é‚æ
+# ãƒ”ãƒ³è¨­å®š (BCMç•ªå·)
+# ã‚¯ãƒ­ãƒƒã‚¯=23, MOSI=19, MISO=21, CS=24
+# â€»å†…éƒ¨çš„ã«Software SPIã¨ã—ã¦å‹•ä½œã™ã‚‹ã‚ˆ
 adc = MCP3208(
     channel=0, 
     clock_pin=23, 
@@ -12,19 +12,19 @@ adc = MCP3208(
     select_pin=24
 )
 
-print("“Ç‚İæ‚è‚ğŠJn‚·‚é‚æ... (Ctrl+C‚Å’â~)")
+print("èª­ã¿å–ã‚Šã‚’é–‹å§‹ã™ã‚‹ã‚ˆ... (Ctrl+Cã§åœæ­¢)")
 
 try:
     while True:
-        # value‚Í0.0(0V) ? 1.0(VREF)‚Ì”ÍˆÍ‚Å•Ô‚Á‚Ä‚­‚é
-        # 12ƒrƒbƒg(0-4095)‚Ì”’l‚É•ÏŠ·‚µ‚Ä•\¦
+        # valueã¯0.0(0V) ã€œ 1.0(VREF)ã®ç¯„å›²ã§è¿”ã£ã¦ãã‚‹
+        # 12ãƒ“ãƒƒãƒˆ(0-4095)ã®æ•°å€¤ã«å¤‰æ›ã—ã¦è¡¨ç¤º
         raw_value = int(adc.value * 4095)
         
-        # “dˆ³i3.3VŠî€‚Ìê‡j‚àŒvZ‚µ‚Ä‚İ‚æ‚¤
+        # é›»åœ§ï¼ˆ3.3VåŸºæº–ã®å ´åˆï¼‰ã‚‚è¨ˆç®—ã—ã¦ã¿ã‚ˆã†
         voltage = adc.value * 3.3
         
-        print(f"’l: {raw_value:4} | “dˆ³: {voltage:.2f}V")
+        print(f"å€¤: {raw_value:4} | é›»åœ§: {voltage:.2f}V")
         sleep(0.5)
 
 except KeyboardInterrupt:
-    print("\nI—¹‚·‚é‚æB")
+    print("\nçµ‚äº†ã™ã‚‹ã‚ˆã€‚")
