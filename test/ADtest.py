@@ -1,21 +1,30 @@
 from gpiozero import MCP3208
 from time import sleep
 
-# ラズパイ5のBCMピン番号を指定
+# ピン設定 (BCM番号)
 # クロック=23, MOSI=19, MISO=21, CS=24
-# ※gpiozeroのMCP3208クラスは標準SPIピンを想定することが多いけど、
-# 任意のピンでソフトSPIっぽく動かすなら以下のように指定できるよ。
+# ※内部的にSoftware SPIとして動作するよ
+adc = MCP3208(
+    channel=0, 
+    clock_pin=23, 
+    mosi_pin=19, 
+    miso_pin=21, 
+    select_pin=24
+)
 
-# デバイスの初期化（channel 0を使用）
-# もし標準のハードウェアSPIを使うなら、もっとシンプルに書けるよ。
-pot = MCP3208(channel=0, clock_pin=23, mosi_pin=19, miso_pin=21, select_pin=24)
+print("読み取りを開始するよ... (Ctrl+Cで停止)")
 
 try:
     while True:
-        # valueは0.0から1.0で返ってくるから、12ビット(4095)に変換
-        voltage = pot.value * 4095
-        print(f"ADC Value: {voltage:.0f}")
-        sleep(0.2)
+        # valueは0.0(0V) ? 1.0(VREF)の範囲で返ってくる
+        # 12ビット(0-4095)の数値に変換して表示
+        raw_value = int(adc.value * 4095)
+        
+        # 電圧（3.3V基準の場合）も計算してみよう
+        voltage = adc.value * 3.3
+        
+        print(f"値: {raw_value:4} | 電圧: {voltage:.2f}V")
+        sleep(0.5)
 
 except KeyboardInterrupt:
-    pass
+    print("\n終了するよ。")
