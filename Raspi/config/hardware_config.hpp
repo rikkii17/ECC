@@ -5,7 +5,9 @@
 
     class hardware_config{
     public:
-        static inline const std::string chip = "0";
+        static constexpr int chip = 0;
+        static constexpr int channel = 0;
+
 
     };
 

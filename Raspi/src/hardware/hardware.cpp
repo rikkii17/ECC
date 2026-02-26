@@ -22,7 +22,7 @@ hardware::pwm::pwm(int chip,int channel)
         }
     }
 
-void hardware::pwm::set_output(int period,int duty_cycle,int polarity){
+void hardware::pwm::set_output(int period,int duty_cycle,std::string polarity){
     //それぞれのファイル変数の定義
     std::ofstream period_file(base_path+"pariod");
     std::ofstream duty_cycle_file(base_path+"duty_cycle");
@@ -50,16 +50,26 @@ void hardware::pwm::set_output(int period,int duty_cycle,int polarity){
         error_flag::hardware_pwm_error = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
         return;
     }
-    polarity_file<<std::to_string(polarity);
+    polarity_file<<polarity;
     polarity_file.close();
     
     return;
 }
 
-
+void hardware::pwm::output_enable(int enable){
+    std::ofstream enable_file(base_path+"enable");
+    if(!enable_file.is_open()){
+        std::cerr<<"error:system file is not open (enable)"<<std::endl;
+        error_flag::hardware_pwm_error = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
+        return;
+    }
+    enable_file<<std::to_string(enable);
+    enable_file.close();
+    return;
+}
 
 void hardware::hardware_system(){
-     
+        
     return;
 
 }

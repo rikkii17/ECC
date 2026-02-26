@@ -54,10 +54,16 @@ int main(){
             //時間を取得
             std::tm now_time = clock_system::get_now_time();
 
-          //イベントハンドラ  
+            //test
+            hardware::pwm test_pwm(hardware_config::chip,hardware_config::channel);
+            test_pwm.set_output(100000,50000,"normal");
+            test_pwm.output_enable(1);
+            //testend
 
+          //イベントハンドラ  
           //Escの処理
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
+                test_pwm.output_enable(0);  //test
                 clockwindow.close();
                 software_config::controller::put_system_is_running(false);
             }
