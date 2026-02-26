@@ -17,7 +17,7 @@ hardware::pwm::pwm(int chip,int channel)
         if(export_file.is_open()){
             export_file<<channel;
             //ƒ`ƒƒƒ“ƒlƒ‹”Ô†‚Ì‚©‚«‚±‚Ý
-            std::this_thread::sleep_for(5);
+            std::this_thread::sleep_for(std::chrono::seconds(5));
         }
         else{
             std::cerr<<"Error:The channel was not secured"<<std::endl;
