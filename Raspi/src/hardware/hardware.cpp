@@ -2,6 +2,7 @@
 #include<string>
 #include<iostream>
 #include<fstream>
+#include<thread>
 
 #include"hardware.hpp"
 #include"clock_system.hpp"
@@ -16,6 +17,7 @@ hardware::pwm::pwm(int chip,int channel)
         if(export_file.is_open()){
             export_file<<channel;
             //ƒ`ƒƒƒ“ƒlƒ‹”Ô†‚Ì‚©‚«‚±‚Ý
+            std::this_thread::sleep_for(5);
         }
         else{
             std::cerr<<"Error:The channel was not secured"<<std::endl;
@@ -38,7 +40,7 @@ void hardware::pwm::set_output(int period,int duty_cycle,std::string polarity){
     period_file.close();
     //ONŽžŠÔÝ’è
     if(!duty_cycle_file.is_open()){
-        std::cerr<<"error:system file is not open (period)"<<std::endl;
+        std::cerr<<"error:system file is not open (duty cycle)"<<std::endl;
         error_flag::hardware_pwm_error = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
         return;
     }
@@ -46,7 +48,7 @@ void hardware::pwm::set_output(int period,int duty_cycle,std::string polarity){
     duty_cycle_file.close();
     //‹É«Ý’è
     if(!polarity_file.is_open()){
-        std::cerr<<"error:system file is not open (period)"<<std::endl;
+        std::cerr<<"error:system file is not open (polarity)"<<std::endl;
         error_flag::hardware_pwm_error = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
         return;
     }
