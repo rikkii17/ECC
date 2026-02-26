@@ -3,6 +3,8 @@
 #include<iostream>
 #include<fstream>
 #include<thread>
+#include<cstring>
+#include<cerrno>
 
 #include"hardware.hpp"
 #include"clock_system.hpp"
@@ -32,7 +34,7 @@ void hardware::pwm::set_output(int period,int duty_cycle,std::string polarity){
 
     //üŠúİ’è
     if(!period_file.is_open()){
-        std::cerr<<"error:system file is not open (period)"<<std::endl;
+        std::cerr<<"error:system file is not open (period):"<<strerror(errno)<<std::endl;
         error_flag::hardware_pwm_error = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
         return;
     }
@@ -40,7 +42,7 @@ void hardware::pwm::set_output(int period,int duty_cycle,std::string polarity){
     period_file.close();
     //ONŠÔİ’è
     if(!duty_cycle_file.is_open()){
-        std::cerr<<"error:system file is not open (duty cycle)"<<std::endl;
+        std::cerr<<"error:system file is not open (duty cycle):"<<strerror(errno)<<std::endl;
         error_flag::hardware_pwm_error = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
         return;
     }
@@ -48,7 +50,7 @@ void hardware::pwm::set_output(int period,int duty_cycle,std::string polarity){
     duty_cycle_file.close();
     //‹É«İ’è
     if(!polarity_file.is_open()){
-        std::cerr<<"error:system file is not open (polarity)"<<std::endl;
+        std::cerr<<"error:system file is not open (polarity):"<<strerror(errno)<<std::endl;
         error_flag::hardware_pwm_error = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
         return;
     }
