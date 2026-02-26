@@ -13,7 +13,7 @@
 #include"error.hpp"
 
 hardware::pwm::pwm(int chip,int channel)
-    : base_path("sys/class/pwm/pwmchip" + std::to_string(chip) + "/pwm" + std::to_string(channel) + "/")
+    : base_path("/sys/class/pwm/pwmchip" + std::to_string(chip) + "/pwm" + std::to_string(channel) + "/")
     {
         std::ofstream export_file("/sys/class/pwm/pwmchip" + std::to_string(chip) + "/export");
         if(export_file.is_open()){
