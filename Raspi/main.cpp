@@ -50,7 +50,7 @@ int main(){
 
     //test
             hardware::pwm test_pwm(hardware_config::chip,hardware_config::channel);
-            test_pwm.set_output(100000,50000,"normal");
+            test_pwm.set_output(100000000,50000000,"normal");
             test_pwm.output_enable(1);
             //testend
 
