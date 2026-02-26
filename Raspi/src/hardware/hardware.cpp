@@ -28,7 +28,7 @@ hardware::pwm::pwm(int chip,int channel)
 
 void hardware::pwm::set_output(int period,int duty_cycle,std::string polarity){
     //それぞれのファイル変数の定義
-    std::ofstream period_file(base_path+"pariod");
+    std::ofstream period_file(base_path+"period");
     std::ofstream duty_cycle_file(base_path+"duty_cycle");
     std::ofstream polarity_file(base_path+"polarity");
 
