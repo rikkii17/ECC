@@ -21,8 +21,8 @@
 
                 •Ô‚è’l:     void
             */
-        
             
+            void output_enable(int enable);
 
         };
 

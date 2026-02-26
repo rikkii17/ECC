@@ -57,6 +57,7 @@ void hardware::pwm::set_output(int period,int duty_cycle,int polarity){
 }
 
 
+
 void hardware::hardware_system(){
      
     return;
