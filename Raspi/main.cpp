@@ -48,18 +48,20 @@ int main(){
     std::cout<<"\t starting the clock GUI window \n \n \n"<<std::endl;
     sf::RenderWindow clockwindow(sf::VideoMode({1280,720}), "fullscreen");
 
+    //test
+            hardware::pwm test_pwm(hardware_config::chip,hardware_config::channel);
+            test_pwm.set_output(100000,50000,"normal");
+            test_pwm.output_enable(1);
+            //testend
+
+
     //ウィンドウループ
     while(clockwindow.isOpen()){
         while(std::optional event = clockwindow.pollEvent()){
             //時間を取得
             std::tm now_time = clock_system::get_now_time();
 
-            //test
-            hardware::pwm test_pwm(hardware_config::chip,hardware_config::channel);
-            test_pwm.set_output(100000,50000,"normal");
-            test_pwm.output_enable(1);
-            //testend
-
+            
           //イベントハンドラ  
           //Escの処理
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
