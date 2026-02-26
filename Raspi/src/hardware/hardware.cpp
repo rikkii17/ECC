@@ -19,7 +19,7 @@ hardware::pwm::pwm(int chip,int channel)
         if(export_file.is_open()){
             export_file<<channel;
             //ƒ`ƒƒƒ“ƒlƒ‹”Ô†‚Ì‚©‚«‚±‚Ý
-            std::this_thread::sleep_for(std::chrono::seconds(5));
+            std::this_thread::sleep_for(std::chrono::seconds(10));
         }
         else{
             std::cerr<<"Error:The channel was not secured"<<std::endl;
@@ -63,7 +63,7 @@ void hardware::pwm::set_output(int period,int duty_cycle,std::string polarity){
 void hardware::pwm::output_enable(int enable){
     std::ofstream enable_file(base_path+"enable");
     if(!enable_file.is_open()){
-        std::cerr<<"error:system file is not open (enable)"<<std::endl;
+        std::cerr<<"error:system file is not open (enable):"<<strerror(errno)<<std::endl;
         error_flag::hardware_pwm_error = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
         return;
     }
