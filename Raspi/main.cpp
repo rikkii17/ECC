@@ -48,13 +48,6 @@ int main(){
     std::cout<<"\t starting the clock GUI window \n \n \n"<<std::endl;
     sf::RenderWindow clockwindow(sf::VideoMode({1280,720}), "fullscreen");
 
-    //test
-            hardware::pwm test_pwm(hardware_config::chip,hardware_config::channel);
-            test_pwm.set_output(100000000,50000000,"normal");
-            test_pwm.output_enable(1);
-            //testend
-
-
     //ウィンドウループ
     while(clockwindow.isOpen()){
         while(std::optional event = clockwindow.pollEvent()){
@@ -65,7 +58,6 @@ int main(){
           //イベントハンドラ  
           //Escの処理
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
-                test_pwm.output_enable(0);  //test
                 clockwindow.close();
                 software_config::controller::put_system_is_running(false);
             }
