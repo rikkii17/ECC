@@ -20,23 +20,36 @@
     //エラー関係を扱うライブラリ
     #include"clock_system_config.hpp"
     //時計関係のconfigを入れるライブラリ
+    #include"hardware.hpp"
+    #include"hardware_config.hpp"
 
     class initialization{
     public:
-            class software{
-            public:
-                static int device();
-                /*
-                    全体の初期化を行う。
-                    
-                    引数:   void
-                    返り値: void
-                */
-
-                static int alarm_file_initialization();
-
-
+        class software{
+        public:
+            static int alarm_file_initialization();
+            /*
+                アラームファイルの読み込みを行う（未実装）
+                
+                引数    ;なし
+                返り値  :レスポンスコード
+            */
         };
+
+        class hardware{
+            
+        };
+
+
+        
+        static int device();
+            /*
+                全体の初期化を行う。
+                
+                引数:   void
+                返り値: レスポンスコード
+            */
+           
     };
     
 #endif

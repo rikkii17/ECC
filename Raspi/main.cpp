@@ -27,18 +27,23 @@ int main(){
 
     // ハードウェアパッケージの初期化
     std::cout <<"\t Initializing hardware"<<std::endl;
-    int error_flag;
-
-    error_flag = initialization::software::device();
-    if(error_process::initialization_error(error_flag)) std::exit(EXIT_FAILURE);
+    
+    //ソフトウェアの初期化
+    int error_flag; 
+    error_flag = initialization::device();
+    //エラーフラグが立った時の処理（initialization_errorで終了が宣言されたときにシステム全体を停止する）
+    if(error_process::initialization_error(error_flag)) std::exit(EXIT_FAILURE);    
 
 
     std::cout<<"Launching the application"<<std::endl;
 
     std::cout<<"\t starting the clock system"<<std::endl;
     std::thread system_clock_thread(clock_system::set_now_time);
+    //現在時刻をstd::tmで取得するためのスレッド
     std::cout<<"\t startiong the alarm system"<<std::endl;
     std::thread alarm_system_thread(alarm_system::check_alarm);
+    //アラームの確認をするためのスレッドの立ち上げ
+
     //SFMLウィンドウ立ち上げ
     std::cout<<"\t starting the clock GUI window \n \n \n"<<std::endl;
     sf::RenderWindow clockwindow(sf::VideoMode({1280,720}), "fullscreen");
@@ -46,18 +51,24 @@ int main(){
     //ウィンドウループ
     while(clockwindow.isOpen()){
         while(std::optional event = clockwindow.pollEvent()){
+            //時間を取得
             std::tm now_time = clock_system::get_now_time();
 
+            
           //イベントハンドラ  
+          //Escの処理
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
                 clockwindow.close();
                 software_config::controller::put_system_is_running(false);
             }
-        }
+            }
 
 
         //終了確認
-        if(software_config::controller::get_system_is_running() == false)  break;
+        if(software_config::controller::get_system_is_running() == false){
+            clockwindow.close();
+            break;
+        }
     }    
 
     std::cout<<"\n \n \nShutting down system"<<std::endl;
