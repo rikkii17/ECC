@@ -5,11 +5,11 @@
 
     class hardware_config{
     public:
-        class pin_number{
-        public:
-        
-    };
+        static constexpr int chip = 0;
+        static constexpr int channel = 0;
+
 
     };
+
 
 #endif

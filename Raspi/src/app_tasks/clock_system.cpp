@@ -7,6 +7,7 @@
 #include"clock_system_config.hpp"
 #include"softconfig.hpp"
 
+//clock_systemクラス
 void clock_system::set_now_time(){
     while(true){
         clock_system::now_time_t = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
@@ -24,6 +25,8 @@ std::tm clock_system::get_now_time(){
     return(*now_time);
 }
 
+
+//alarm_systemクラス
 void alarm_system::check_alarm(){
     alarm_system_config::alarm_list* alarm_list_data = alarm_system_config::alarm_list_head;
     std::tm now_time;
