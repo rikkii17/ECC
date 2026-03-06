@@ -47,6 +47,7 @@
     class error_flag{
     public:
         static inline std::atomic<int> hardware_pwm_error{error_number::hardware::OK};
+        static inline std::atomic<int> hardware_spi_error{error_number::hardware::OK};
     };
     
 

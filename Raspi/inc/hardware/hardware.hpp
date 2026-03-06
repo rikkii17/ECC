@@ -2,6 +2,15 @@
     #define HARDWARE_HPP
     #include<string>
 
+    #include<fcntl.h>
+    //デバイスファイルを開く
+    #include<unistd.h>
+    //デバイス操作関数系
+    #include<sys/ioctl.h>
+    //速度やモードのセット関数
+    #include<linux/spi/spidev.h>
+    //SPI通信構造体ヘッダー
+
     #include"hardware_config.hpp"
     
     class hardware{
@@ -29,6 +38,29 @@
                 返り値:     void
             */
 
+        };
+        class spi{
+        private:
+            int fd;
+            uint32_t speed;
+
+        public:
+            spi(const std::string& device, uint32_t speed);
+            /*
+                コンストラクタ
+                第1引数:    SPI通信Path（string)
+                第2引数:    通信速度(32bit int)
+            */
+
+            ~spi();
+            //デストラクタ
+
+            int read_adc(int channel);
+            /*
+                SPIの値を返す関数
+                第1引数:    MCP3208のチャンネル位置
+                返り値:     SPIから送られてきた整数値
+            */
         };
 
 

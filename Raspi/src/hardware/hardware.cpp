@@ -12,6 +12,7 @@
 #include"hardware_config.hpp"
 #include"error.hpp"
 
+//PWM
 hardware::pwm::pwm(int chip,int channel)
     : base_path("/sys/class/pwm/pwmchip" + std::to_string(chip) + "/pwm" + std::to_string(channel) + "/")
     {
@@ -71,6 +72,56 @@ void hardware::pwm::output_enable(int enable){
     enable_file.close();
     return;
 }
+
+//SPI
+hardware::spi::spi(const std::string& device, uint32_t speed) : speed(speed) {
+    fd = open(device.c_str(), O_RDWR);
+    if (fd < 0) {
+        std::cerr << "Error: SPI device is not use." << std::endl;
+        error_flag::hardware_spi_error = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
+        return;
+    }
+
+    uint8_t mode = SPI_MODE_0;
+    uint8_t bits = 8;
+    ioctl(fd, SPI_IOC_WR_MODE, &mode);
+    ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &bits);
+    ioctl(fd, SPI_IOC_WR_MAX_SPEED_HZ, &speed);
+}
+
+hardware::spi::spi::~spi() {
+    if (fd >= 0) close(fd);
+}
+
+int hardware::spi::read_adc(int channel) {
+    if (fd < 0) return -1;
+
+    uint8_t tx[3] = {0};
+    // MCP3208の制御ビットを設定（3bits）
+    tx[0] = 0x06 | ((channel & 0x04) >> 2);
+    //スタートビットとSGLの設定　測定チャンネルの設定（D2）
+    tx[1] = (channel & 0x03) << 6;
+    //測定チャンネルの設定（D1、D0）
+    tx[2] = 0x00;
+    //enpty
+
+    uint8_t rx[3] = {0};
+    //受信用バッファ
+    struct spi_ioc_transfer tr = {0};
+    tr.tx_buf = (unsigned long)tx;
+    tr.rx_buf = (unsigned long)rx;
+    tr.len = 3;
+    tr.speed_hz = speed;
+    tr.bits_per_word = 8;
+    //通信設定用構造体とその設定
+
+    if (ioctl(fd, SPI_IOC_MESSAGE(1), &tr) < 1) {
+        return -1;
+    }
+
+    return ((rx[1] & 0x0F) << 8) | rx[2];
+}
+
 
 void hardware::hardware_system(){
         
