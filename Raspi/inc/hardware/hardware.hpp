@@ -61,7 +61,16 @@
                 第1引数:    MCP3208のチャンネル位置
                 返り値:     SPIから送られてきた整数値
             */
+        
+            float to_voltage(int spi_data);
+            /*
+                SPIのデータを電圧に直す関数
+                第1引数:    spiデータ（int）
+                返り値:     電圧(float)
+            */
         };
+
+
 
 
         static void hardware_system();

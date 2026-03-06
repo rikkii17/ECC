@@ -122,9 +122,13 @@ int hardware::spi::read_adc(int channel) {
     return ((rx[1] & 0x0F) << 8) | rx[2];
 }
 
+float  hardware::spi::to_voltage(int spi_data){
+    return((spi_data*3.3)/4095.0);
+}
 
 void hardware::hardware_system(){
-        
+    
+    
     return;
 
 }
