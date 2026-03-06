@@ -39,10 +39,13 @@ int main(){
 
     std::cout<<"\t starting the clock system"<<std::endl;
     std::thread system_clock_thread(clock_system::set_now_time);
-    //現在時刻をstd::tmで取得するためのスレッド
+    //現在時刻をstd::tmで取得するためのスレッドの立ち上げ
     std::cout<<"\t startiong the alarm system"<<std::endl;
     std::thread alarm_system_thread(alarm_system::check_alarm);
     //アラームの確認をするためのスレッドの立ち上げ
+    std::cout<<"\t starting the hardware system"<<std::endl;
+    std::thread hardware_thread(hardware::hardware_system);
+    //ハードウェア系の処理を行うスレッドの立ち上げ
 
     //SFMLウィンドウ立ち上げ
     std::cout<<"\t starting the clock GUI window \n \n \n"<<std::endl;
@@ -73,6 +76,8 @@ int main(){
 
     std::cout<<"\n \n \nShutting down system"<<std::endl;
     //終了操作
+    hardware_thread.join();
+    std::cout<<"\thardware system shutdown"<<std::endl;
     alarm_system_thread.join();
     std::cout<<"\talarm system shutdown"<<std::endl;
     system_clock_thread.join();

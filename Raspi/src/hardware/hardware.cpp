@@ -5,6 +5,7 @@
 #include<thread>
 #include<cstring>
 #include<cerrno>
+#include<cmath>
 
 #include"hardware.hpp"
 #include"clock_system.hpp"
@@ -126,9 +127,26 @@ float  hardware::spi::to_voltage(int spi_data){
     return((spi_data*3.3)/4095.0);
 }
 
-void hardware::hardware_system(){
-    
-    
-    return;
+float hardware::spi::weight_to_voltage(float weight){
+    return(3.3*std::exp(0.3*weight));
+    //0.3=exp(zeta*m)‚Ìzeta‚ª0.3‚­‚ç‚¢‚Å‚ ‚é‚Æ„‘ª
 
+}
+
+void hardware::hardware_system(){
+    while (true){
+        float weight_voltage;
+        hardware::spi weight_data_spi(hardware_config::spi_device,hardware_config::spi_speed);
+
+        weight_voltage = weight_data_spi.read_adc(0);
+        if(weight_data_spi.weight_to_voltage(5)<weight_voltage){
+            alarm_system_config::ararm_is_ringing = true;
+        }
+        //I—¹‘€ì
+        if(software_config::controller::get_system_is_running() == false){
+            weight_data_spi.~spi();
+            break;
+        }
+    }
+    return;
 }

@@ -68,6 +68,16 @@
                 第1引数:    spiデータ（int）
                 返り値:     電圧(float)
             */
+        
+            float weight_to_voltage(float weight);
+            /*
+                電圧値を重量に変える
+                第1引数:    電圧(float)
+                返り値:     重量(float)
+            */
+
+
+
         };
 
 
