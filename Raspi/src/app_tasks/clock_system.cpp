@@ -2,6 +2,8 @@
 //時間系のシステムを定義するため。
 #include<atomic>
 //安全に変数を扱う目的
+#include"csv.hpp"
+//csvparserを扱うライブラリ
 
 #include"clock_system.hpp"
 #include"clock_system_config.hpp"
@@ -36,6 +38,7 @@ void alarm_system::check_alarm(){
             now_time = clock_system::get_now_time();
 
             //アラームをならすフラッグを立てる
+            //アラームの曜日の設定はまだ
             if(alarm_list_data->alarm_hour == now_time.tm_hour && alarm_list_data->alarm_minute == now_time.tm_min) alarm_system_config::ararm_is_ringing = true;
 
             //次のリストデータへアクセス
@@ -51,25 +54,25 @@ void alarm_system::check_alarm(){
 }
 
 void alarm_system::set_alarm_list(int hour,int minuts,alarm_system_config::week_config week_data){
+    alarm_system_config::alarm_list* new_alarm = new alarm_system_config::alarm_list;
+    //値の新規代入
+    new_alarm->alarm_hour = hour;
+    new_alarm->alarm_minute = minuts;
+    new_alarm->week_data = week_data;
+    new_alarm->next = nullptr;
 
-    alarm_system_config::alarm_list* new_alarm_list = new alarm_system_config::alarm_list;
-
-    new_alarm_list->next = nullptr;
-
-    //それぞれコピーする。
-    new_alarm_list->alarm_hour = hour;
-    new_alarm_list->alarm_minute = minuts;
-    new_alarm_list->week_data = week_data;
-
+    //アラームリストの実態が存在しない場合の処理
     if(alarm_system_config::alarm_list_head == nullptr){
-        alarm_system_config::alarm_list_head = new_alarm_list;
-        return;
+        alarm_system_config::alarm_list_head = new_alarm;
     }
-
-    alarm_system_config::alarm_list* next_list_data = alarm_system_config::alarm_list_head;
-    while (next_list_data->next != nullptr) next_list_data = next_list_data->next;
-    
-    next_list_data->next = new_alarm_list;
-
+    //実態が存在する場合
+    else{
+        alarm_system_config::alarm_list* current_alarm = alarm_system_config::alarm_list_head;
+        while(current_alarm->next != nullptr){
+            current_alarm = current_alarm->next;
+        }
+        current_alarm->next = new_alarm;
+    }
     return;
 }
+
