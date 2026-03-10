@@ -65,5 +65,12 @@
                     引数:       void
                     返り値:     void
             */
+
+            static void set_new_alarm();
+            /*
+                アラームリストに新しい時間を設定する
+                    引数:       void
+                    返り値:     void
+            */
     };
 #endif

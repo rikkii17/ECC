@@ -2,6 +2,7 @@
 //時間系のシステムを定義するため。
 #include<atomic>
 //安全に変数を扱う目的
+#include<sstream>
 #include"csv.hpp"
 //csvparserを扱うライブラリ
 
@@ -149,4 +150,48 @@ void alarm_system::save_alarm_list_to_csv(){
     }
 
     file.close();
+}
+
+void alarm_system::set_new_alarm(){
+    std::string input_data;
+    int hour = 0;
+    int minute  = 0;
+    char delimiter;
+
+    //時間の取得
+    std::cout<<"setting the new alarm"<<std::endl;
+    std::cout<<"Please enter the alarm time\nex)08:30 "<<std::endl;
+    std::cin>>input_data;
+
+    //時間の入力値の解析
+    std::stringstream ss(input_data);
+    ss >> hour >> delimiter >> minute;
+        if (ss.fail() || delimiter != ':' || hour < 0 || hour > 23 || minute < 0 || minute > 59) {
+            std::cerr << "Invalid time format. Please enter in HH:MM format." << std::endl;
+            return;
+        }
+    //曜日の取得
+    std::cout<<"Please enter the day of the week you wish to use as a number"<<std::endl;
+    std::cout<<"0: Sunday\n1: Monday\n2: Tuesday\n3: Wednesday\n4: Thursday\n5: Friday\n6: Saturday"<<std::endl;
+    std::cout<<"ex) If you want to set an alarm for Monday, Wednesday, and Friday, enter 1010101"<<std::endl;
+    std::cin>>input_data;
+    if(input_data.length() != 7){
+        std::cerr << "Invalid input. Please enter a 7-digit binary string." << std::endl;
+        return;
+    }
+    //曜日の設定の解析
+    alarm_system_config::week_config week_data;
+    week_data.is_active = 1;
+    week_data.sunday = input_data[0] - '0';
+    week_data.monday = input_data[1] - '0';
+    week_data.tuesday = input_data[2] - '0';
+    week_data.wednesday = input_data[3] - '0';
+    week_data.thursday = input_data[4] - '0';
+    week_data.friday = input_data[5] - '0';
+    week_data.saturday = input_data[6] - '0';
+
+    //データをアラームリストへ追加
+    alarm_system::set_alarm_list(hour,minute,week_data);
+
+    return;
 }

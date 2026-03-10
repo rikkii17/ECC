@@ -58,8 +58,12 @@ int main(){
             std::tm now_time = clock_system::get_now_time();
 
             
-          //イベントハンドラ  
-          //Escの処理
+            //イベントハンドラ  
+            //新規アラームの設定
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::N) == true){
+                alarm_system::set_new_alarm();
+            }
+            //Escの処理
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
                 clockwindow.close();
                 software_config::controller::put_system_is_running(false);
