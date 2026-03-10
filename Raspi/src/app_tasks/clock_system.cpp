@@ -30,6 +30,9 @@ std::tm clock_system::get_now_time(){
 
 //alarm_systemクラス
 void alarm_system::check_alarm(){
+    //アラームをCSVから読み込み
+    alarm_system::get_alarm_list_from_csv();
+
     alarm_system_config::alarm_list* alarm_list_data = alarm_system_config::alarm_list_head;
     std::tm now_time;
 
@@ -59,7 +62,11 @@ void alarm_system::check_alarm(){
         }
         
         //終了操作
-        if(software_config::controller::get_system_is_running() == false)   break;
+        if(software_config::controller::get_system_is_running() == false){
+            //アラームの設定を保存
+            alarm_system::save_alarm_list_to_csv();
+            break;
+        }
         
     }
     return;

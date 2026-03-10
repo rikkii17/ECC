@@ -53,13 +53,13 @@
                     第3引数:    アラームの曜日の設定（alarm_system_config::week_config)
                     返り値:     void
             */
-           void get_alarm_list_from_csv();
+           static void get_alarm_list_from_csv();
            /*
                 CSVファイルからアラームリストを取得する
                     引数:       void
                     返り値:     void
            */
-            void save_alarm_list_to_csv();
+            static void save_alarm_list_to_csv();
             /*
                 アラームリストをCSVファイルに保存する
                     引数:       void
