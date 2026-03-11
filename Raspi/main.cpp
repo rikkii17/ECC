@@ -48,7 +48,7 @@ int main(){
     //ハードウェア系の処理を行うスレッドの立ち上げ
 
     //時間を直に設定するためのコード（テスト用）
-    alarm_system::set_alarm_list(16,15,{1,1,1,1,1,1,1});
+    alarm_system::set_alarm_list(16,22,{1,1,1,1,1,1,1});
     std::cout<<"\t setting the alarm for 16:15 on everyday"<<std::endl;
     //testcord end
 
@@ -67,6 +67,11 @@ int main(){
             //新規アラームの設定
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::N) == true){
                 alarm_system::set_new_alarm();
+                continue;
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) == true){
+                alarm_system_config::ararm_is_ringing = true;
+                continue;
             }
             //Escの処理
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
