@@ -73,6 +73,12 @@ int main(){
                 alarm_system_config::ararm_is_ringing = true;
                 continue;
             }
+
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E) == true){
+                std::cout<<alarm_system_config::ararm_is_ringing<<std::endl;
+                continue;
+            }
+
             //Esc‚Ìˆ—
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
                 clockwindow.close();
