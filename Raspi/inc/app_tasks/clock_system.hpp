@@ -66,11 +66,25 @@
                     返り値:     void
             */
 
+            static int select_alarm_list();
+            /*
+                任意のアラームリストを選択させるための機能をまとめた関数
+                引数:   void
+                返り値: リストの何番目を選択したか（0～）（int)
+            */
+
             static void set_new_alarm();
             /*
                 アラームリストに新しい時間を設定する
                     引数:       void
                     返り値:     void
             */
+            static void edit_alarm();
+            /*
+                アラームリストのON/OFFを設定する
+                引数:   vod
+                返り値: void
+            */
+
     };
 #endif

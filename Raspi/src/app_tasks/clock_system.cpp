@@ -151,6 +151,42 @@ void alarm_system::save_alarm_list_to_csv(){
 
     file.close();
 }
+/*
+int alarm_system::select_alarm_list(){
+    int select_number;
+    std::string input_data;
+    alarm_system_config::alarm_list alarm_list* = alarm_system_config::alarm_list_head;
+
+    //リストの出力
+    for(select_number = 1:alarm_list.next == nullptr:select_number++){
+        std::cout<<select_number<<". "<<alarm_list->alarm_hour<<":"<<alarm_list->alarm_minute<<" ";
+        if(alarm_list->week_data.sunday)    std::cout<<"Sun ";
+        if(alarm_list->week_data.monday)    std::cout<<"Mon ";
+        if(alarm_list->week_data.tuesday)   std::cout<<"Tue ";
+        if(alarm_list->week_data.wednesday) std::cout<<"Wed ";
+        if(alarm_list->week_data.thursday)  std::cout<<"Thu ";
+        if(alarm_list->week_data.friday)    std::cout<<"Fri ";
+        if(alarm_list->week_data.saturday)  std::cout<<"Sat ";
+        if(alarm_list->week_data.is_active)   std::cout<<"ON";
+        else    std::cout<<"OFF";
+        std::cout<<std::endl;
+        alarm_list = alarm_list->next;
+    }
+    //入力部
+    std::cout<<"Prease select the alarm list number"<<std::endl;
+    std::cin>>input_data;
+    //値を読み込む
+    try{
+        select_number = std::stoi(input_data);
+    }
+    catch(const std::exception& e){
+        std::cerr << "Invalid input. Please enter a valid number." << std::endl;
+        return -1;
+    }   
+    return(select_number-1);
+}
+実装していないためコメントアウト    
+*/
 
 void alarm_system::set_new_alarm(){
     std::string input_data;
@@ -195,3 +231,27 @@ void alarm_system::set_new_alarm(){
 
     return;
 }
+/*
+void alarm_system::edit_alarm(){
+    int select_number;
+    while (true){
+        std::cout<<"Edhit the alarm list ON/OFF"<<std::endl;
+        select_number = alarm_system::select_alarm_list();
+        if(select_number < 0){
+            std::cerr << "Invalid selection. Please try again." << std::endl;
+            continue;
+        }
+        alarm_system_config::alarm_list* current_alarm = alarm_system_config::alarm_list_head;
+        for(int i = 0; i < select_number; i++){
+            if(current_alarm->next == nullptr){
+                std::cerr << "Selected number exceeds the alarm list." << std::endl;
+                return;
+            }
+            current_alarm = current_alarm->next;
+        }
+
+    }
+
+}
+未実装コードのためコメントアウト    
+*/

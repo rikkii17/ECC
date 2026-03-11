@@ -139,7 +139,7 @@ void hardware::hardware_system(){
         hardware::spi weight_data_spi(hardware_config::spi_device,hardware_config::spi_speed);
 
         weight_voltage = weight_data_spi.read_adc(0);
-        if(weight_data_spi.weight_to_voltage(5)<weight_voltage){
+        if(1<weight_voltage){//“dˆ³è‡’l‚ðŽŽ‚µ‚É1V‚ÉÝ’è
             alarm_system_config::ararm_is_ringing = true;
         }
         //I—¹‘€ì
