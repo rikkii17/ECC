@@ -134,13 +134,21 @@ float hardware::spi::weight_to_voltage(float weight){
 }
 
 void hardware::hardware_system(){
+    hardware::pwm alarm(0,0);
+    alarm.set_output(10000,10000,"normal");
     while (true){
         float weight_voltage;
         hardware::spi weight_data_spi(hardware_config::spi_device,hardware_config::spi_speed);
 
         weight_voltage = weight_data_spi.read_adc(0);
-        if(1<weight_voltage){//電圧閾値を試しに1Vに設定
-            alarm_system_config::ararm_is_ringing = true;
+        if(alarm_system_config::ararm_is_ringing){
+            if(1<weight_voltage){//電圧閾値を試しに1Vに設定
+
+                alarm.output_enable(1);
+            }
+        }
+        else{
+            alarm.output_enable(0);
         }
         //終了操作
         if(software_config::controller::get_system_is_running() == false){
