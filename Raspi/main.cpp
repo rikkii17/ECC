@@ -47,6 +47,11 @@ int main(){
     std::thread hardware_thread(hardware::hardware_system);
     //ハードウェア系の処理を行うスレッドの立ち上げ
 
+    //時間を直に設定するためのコード（テスト用）
+    alarm_system::set_alarm_list(16,15,{1,1,1,1,1,1,1});
+    std::cout<<"\t setting the alarm for 16:15 on everyday"<<std::endl;
+    //testcord end
+
     //SFMLウィンドウ立ち上げ
     std::cout<<"\t starting the clock GUI window \n \n \n"<<std::endl;
     sf::RenderWindow clockwindow(sf::VideoMode({1280,720}), "fullscreen");
