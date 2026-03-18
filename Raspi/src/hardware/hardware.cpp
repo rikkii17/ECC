@@ -33,6 +33,7 @@ void hardware::pwm::set_output(int period,int duty_cycle,std::string polarity){
     std::ofstream period_file(base_path+"period");
     std::ofstream duty_cycle_file(base_path+"duty_cycle");
     std::ofstream polarity_file(base_path+"polarity");
+    bool error_flag[4];
 
     //周期設定
     if(!period_file.is_open()){
@@ -62,16 +63,16 @@ void hardware::pwm::set_output(int period,int duty_cycle,std::string polarity){
     return;
 }
 
-void hardware::pwm::output_enable(int enable){
+int hardware::pwm::output_enable(int enable){
     std::ofstream enable_file(base_path+"enable");
     if(!enable_file.is_open()){
         std::cerr<<"error:system file is not open (enable):"<<strerror(errno)<<std::endl;
         error_flag::hardware_pwm_error = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
-        return;
+        return(error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN);
     }
     enable_file<<std::to_string(enable);
     enable_file.close();
-    return;
+    return(error_number::hardware::OK);
 }
 
 //SPI
@@ -135,16 +136,24 @@ float hardware::spi::weight_to_voltage(float weight){
 
 void hardware::hardware_system(){
     hardware::pwm alarm(0,0);
+    //チップナンバー、チャンネルナンバー
     alarm.set_output(10000,10000,"normal");
-    while (true){
+    int error_flag = error_number::hardware::OK;
+    while(true){
         float weight_voltage;
         hardware::spi weight_data_spi(hardware_config::spi_device,hardware_config::spi_speed);
 
         weight_voltage = weight_data_spi.read_adc(0);
+        if(weight_voltage <0)error_flag = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
+        //testcode
         if(alarm_system_config::ararm_is_ringing){
             if(1<weight_voltage){//電圧閾値を試しに1Vに設定
 
-                alarm.output_enable(1);
+                if(error_flag == error_number::hardware::OK){
+                    error_flag = alarm.output_enable(1);
+
+                    //おそらくこの辺がおかしい（while true ERROR
+                }
             }
         }
         else{

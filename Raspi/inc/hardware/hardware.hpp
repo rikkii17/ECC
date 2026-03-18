@@ -31,11 +31,11 @@
                 返り値:     void
             */
             
-            void output_enable(int enable);
+            int output_enable(int enable);
             /*
                 規定の設定で出力を設定する関数
                 第１引数:   出力の成否(int)
-                返り値:     void
+                返り値:     エラーフラッグ
             */
 
         };
