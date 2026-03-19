@@ -144,6 +144,7 @@ void hardware::hardware_system(){
         hardware::spi weight_data_spi(hardware_config::spi_device,hardware_config::spi_speed);
 
         weight_voltage = weight_data_spi.read_adc(0);
+        std::cout<<weight_voltage<<std::endl;
         if(weight_voltage <0)error_flag = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
         //testcode
         if(alarm_system_config::ararm_is_ringing){
