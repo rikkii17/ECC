@@ -38,7 +38,7 @@ void alarm_system::check_alarm(){
     std::tm now_time;
 
     while (true){
-        if(alarm_list_data != nullptr && alarm_system_config::ararm_is_ringing){
+        if(alarm_list_data != nullptr && !alarm_system_config::ararm_is_ringing){
             now_time = clock_system::get_now_time();
 
             //アラームをならすフラッグを立てる
