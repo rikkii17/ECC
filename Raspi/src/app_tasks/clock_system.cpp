@@ -56,11 +56,10 @@ void alarm_system::check_alarm(){
                     }
                 }
             }
-
-            //次のリストデータへアクセス
-            if(alarm_list_data->next == nullptr)    alarm_list_data = alarm_system_config::alarm_list_head;
-            else    alarm_list_data = alarm_list_data->next;
-        }
+        }   
+        //次のリストデータへアクセス
+        if(alarm_list_data->next == nullptr)    alarm_list_data = alarm_system_config::alarm_list_head;
+        else    alarm_list_data = alarm_list_data->next;
         
         //終了操作
         if(software_config::controller::get_system_is_running() == false){
