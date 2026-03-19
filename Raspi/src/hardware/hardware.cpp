@@ -161,6 +161,7 @@ void hardware::hardware_system(){
         }
         //I—¹‘€ì
         if(software_config::controller::get_system_is_running() == false){
+            alarm.output_enable(0);
             weight_data_spi.~spi();
             break;
         }

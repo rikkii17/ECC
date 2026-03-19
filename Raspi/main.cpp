@@ -70,7 +70,7 @@ int main(){
                 continue;
             }
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) == true){
-                alarm_system_config::ararm_is_ringing = true;
+                alarm_system_config::ararm_is_ringing = false;
                 continue;
             }
 
