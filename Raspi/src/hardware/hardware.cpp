@@ -147,7 +147,7 @@ void hardware::hardware_system(){
         if(weight_voltage <0)error_flag = error_number::hardware::HARDWARE_FILE_IS_NOT_OPEN;
         //testcode
         if(alarm_system_config::ararm_is_ringing){
-            if(2.0>weight_voltage){//電圧閾値を試しに1Vに設定
+            if(2.6>weight_voltage){//電圧閾値を試しに1Vに設定
 
                 if(error_flag == error_number::hardware::OK){
                     error_flag = alarm.output_enable(1);
