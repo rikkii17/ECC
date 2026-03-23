@@ -39,10 +39,18 @@ int main(){
 
     std::cout<<"\t starting the clock system"<<std::endl;
     std::thread system_clock_thread(clock_system::set_now_time);
-    //現在時刻をstd::tmで取得するためのスレッド
+    //現在時刻をstd::tmで取得するためのスレッドの立ち上げ
     std::cout<<"\t startiong the alarm system"<<std::endl;
     std::thread alarm_system_thread(alarm_system::check_alarm);
     //アラームの確認をするためのスレッドの立ち上げ
+    std::cout<<"\t starting the hardware system"<<std::endl;
+    std::thread hardware_thread(hardware::hardware_system);
+    //ハードウェア系の処理を行うスレッドの立ち上げ
+
+    //時間を直に設定するためのコード（テスト用）
+    alarm_system::set_alarm_list(16,22,{1,1,1,1,1,1,1});
+    std::cout<<"\t setting the alarm for 16:15 on everyday"<<std::endl;
+    //testcord end
 
     //SFMLウィンドウ立ち上げ
     std::cout<<"\t starting the clock GUI window \n \n \n"<<std::endl;
@@ -55,8 +63,23 @@ int main(){
             std::tm now_time = clock_system::get_now_time();
 
             
-          //イベントハンドラ  
-          //Escの処理
+            //イベントハンドラ  
+            //新規アラームの設定
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::N) == true){
+                alarm_system::set_new_alarm();
+                continue;
+            }
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) == true){
+                alarm_system_config::ararm_is_ringing = true;
+                continue;
+            }
+
+            if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::E) == true){
+                std::cout<<alarm_system_config::ararm_is_ringing<<std::endl;
+                continue;
+            }
+
+            //Escの処理
             if(sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape) == true){
                 clockwindow.close();
                 software_config::controller::put_system_is_running(false);
@@ -73,6 +96,8 @@ int main(){
 
     std::cout<<"\n \n \nShutting down system"<<std::endl;
     //終了操作
+    hardware_thread.join();
+    std::cout<<"\thardware system shutdown"<<std::endl;
     alarm_system_thread.join();
     std::cout<<"\talarm system shutdown"<<std::endl;
     system_clock_thread.join();
